@@ -1,0 +1,325 @@
+{% style %}
+.banner-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.banner-image {
+  width: 100%;
+  height: {{ section.settings.banner_height }}vh;
+  object-fit: cover;
+}
+
+.banner-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+  {{ section.settings.overlay_direction }},
+  rgba({{ section.settings.overlay_color.red }}, {{ section.settings.overlay_color.green }}, {{ section.settings.overlay_color.blue }}, 0),
+  rgba({{ section.settings.overlay_color.red }}, {{ section.settings.overlay_color.green }}, {{ section.settings.overlay_color.blue }}, {{ section.settings.overlay_opacity | divided_by: 20.0 }})
+);
+}
+
+.banner-content {
+  position: absolute;
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* vertical */
+.banner-content.top { top: 10%; }
+.banner-content.center { top: 50%; transform: translateY(-50%); }
+.banner-content.bottom { bottom: 40px; }
+
+/* LEFT */
+.banner-content.left { align-items: flex-start; text-align: left; }
+.banner-content.top-left { top: 10%; left: 5%; align-items: flex-start; text-align: left; }
+.banner-content.center-left { top: 50%; left: 5%; transform: translateY(-50%); align-items: flex-start; text-align: left; }
+.banner-content.bottom-left { bottom: 40px; left: 5%; align-items: flex-start; text-align: left; }
+
+/* RIGHT */
+.banner-content.right { align-items: flex-end; text-align: right; }
+.banner-content.top-right { top: 10%; right: 5%; align-items: flex-end; text-align: right; }
+.banner-content.center-right { top: 50%; right: 5%; transform: translateY(-50%); align-items: flex-end; text-align: right; }
+.banner-content.bottom-right { bottom: 40px; right: 5%; align-items: flex-end; text-align: right; }
+
+/* CENTER DEFAULT */
+.banner-content.center-center { 
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+  align-items: center; 
+  text-align: center;
+}
+
+.banner-subheading{
+  font-size: {{ section.settings.subheading_size }}px;
+  color: {{ section.settings.subheading_color }};
+  letter-spacing: 2px;
+}
+
+.banner-heading {
+  font-size: {{ section.settings.heading_size }}px;
+  color: {{ section.settings.heading_color }};
+  margin: 0;
+}
+.banner-btn {
+  padding: 12px 28px;
+  text-decoration: none;
+  transition: 0.3s;
+  display: inline-block;
+}
+
+
+@media(max-width:768px){
+  .banner-image{
+    height: {{ section.settings.mobile_height }}vh;
+  }
+  .banner-heading{
+    font-size: {{ section.settings.heading_size_mobile }}px;
+  }
+}
+{% endstyle %}
+
+<div class="banner-wrapper">
+  
+  {% if section.settings.image != blank %}
+    <img 
+      src="{{ section.settings.image | image_url: width: 2000 }}" 
+      class="banner-image"
+    >
+  {% endif %}
+
+  <div class="banner-overlay"></div>
+
+  <div class="banner-content {{ section.settings.content_position }}">
+    
+    {% for block in section.blocks %}
+      {% case block.type %}
+
+        {% when 'subheading' %}
+          <p class="banner-subheading">
+            {{ block.settings.text }}
+          </p>
+
+        {% when 'heading' %}
+          <h2 class="banner-heading">
+            {{ block.settings.text }}
+          </h2>
+
+        {% when 'button' %}
+          <a href="{{ block.settings.link }}" 
+             class="button"
+             {% comment %} style="
+               background: {{ block.settings.btn_bg }};
+               color: {{ block.settings.btn_text }};
+               border: 1px solid {{ block.settings.btn_border }}; {% endcomment %}
+             ">
+            {{ block.settings.label }}
+          </a>
+
+      {% endcase %}
+    {% endfor %}
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Custom Banner Pro Max",
+  "max_blocks": 10,
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Banner Image"
+    },
+
+    {
+      "type": "range",
+      "id": "banner_height",
+      "label": "Desktop Height",
+      "min": 30,
+      "max": 100,
+      "step": 5,
+      "default": 70
+    },
+    {
+      "type": "range",
+      "id": "mobile_height",
+      "label": "Mobile Height",
+      "min": 30,
+      "max": 100,
+      "step": 5,
+      "default": 50
+    },
+
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay Darkness",
+      "min": 0,
+"max": 1,
+"step": 0.1,
+"default": 0.5
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay Color",
+      "default": "#000000"
+    },
+    {
+      "type": "select",
+      "id": "overlay_direction",
+      "label": "Overlay Direction",
+      "options": [
+        { "value": "to bottom", "label": "Top → Bottom" },
+        { "value": "to top", "label": "Bottom → Top" },
+        { "value": "to right", "label": "Left → Right" },
+        { "value": "to left", "label": "Right → Left" }
+      ],
+      "default": "to bottom"
+    },
+
+    {
+      "type": "select",
+      "id": "content_position",
+      "label": "Content Position",
+      "options": [
+        { "value": "top-left", "label": "Top Left" },
+        { "value": "center-left", "label": "Center Left" },
+        { "value": "bottom-left", "label": "Bottom Left" },
+
+        { "value": "top-right", "label": "Top Right" },
+        { "value": "center-right", "label": "Center Right" },
+        { "value": "bottom-right", "label": "Bottom Right" },
+
+        { "value": "center-center", "label": "Center" }
+      ],
+      "default": "center-center"
+    },
+
+    {
+      "type": "range",
+      "id": "subheading_size",
+      "label": "Subheading Size",
+      "min": 10,
+      "max": 30,
+      "step": 1,
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading Color",
+      "default": "#ffffff"
+    },
+
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading Size",
+      "min": 16,
+      "max": 80,
+      "step": 2,
+      "default": 42
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "label": "Heading Size Mobile",
+      "min": 14,
+      "max": 50,
+      "step": 2,
+      "default": 26
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#ffffff"
+    }
+  ],
+
+  "blocks": [
+    {
+      "type": "subheading",
+      "name": "Subheading",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "NEW COLLECTION"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "name": "Heading",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Heading",
+          "default": "GIFT SETS"
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Button",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Button Text",
+          "default": "SHOP NOW"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "color",
+          "id": "btn_bg",
+          "label": "Button BG",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "btn_text",
+          "label": "Button Text Color",
+          "default": "#000000"
+        },
+        {
+          "type": "color",
+          "id": "btn_border",
+          "label": "Button Border",
+          "default": "#ffffff"
+        }
+      ]
+    }
+  ],
+
+  "presets": [
+    {
+      "name": "Custom Banner Pro Max",
+      "blocks": [
+        { "type": "subheading" },
+        { "type": "heading" },
+        { "type": "button" }
+      ]
+    }
+  ]
+}
+{% endschema %}

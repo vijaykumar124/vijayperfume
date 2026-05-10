@@ -1,0 +1,229 @@
+{% style %}
+
+.collection-showcase {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.collection-showcase__heading {
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 40px;
+  letter-spacing: 3px;
+}
+
+.collection-showcase__grid {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.collection-showcase__item {
+  position: relative;
+  padding: 20px;
+  text-align: center;
+  width: 100%;
+  max-width: 300px;
+}
+
+.collection-showcase__item:not(:last-child) {
+  border-right: 1px solid rgba(0,0,0,0.1);
+}
+
+.collection-showcase__image {
+  width: 100%;
+  max-width: {{ section.settings.image_size }}px;
+  margin: 0 auto 15px;
+}
+
+.collection-showcase__title {
+  font-size: 14px;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+
+.collection-showcase__price {
+  font-size: 14px;
+}
+
+/* 🔥 HOVER ADD TO CART */
+.add-to-cart-btn {
+  position: absolute;
+  bottom: 40%;
+  left: 50%;
+  transform: translate(-50%, 20px);
+  background: black;
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.collection-showcase__item:hover .add-to-cart-btn {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.add-to-cart-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* MOBILE SLIDER TYPE */
+@media(max-width: 768px) {
+  .collection-showcase__grid {
+    overflow-x: auto;
+  }
+
+  .collection-showcase__item {
+    min-width: 250px;
+    border-right: none !important;
+  }
+}
+
+/* MOBILE SLIDER TYPE (FIXED) */
+@media(max-width: 768px) {
+
+  .collection-showcase__grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 16px;
+    padding: 0 10px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .collection-showcase__grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .collection-showcase__item {
+    min-width: 75%;
+    max-width: 75%;
+    flex: 0 0 auto;
+    border-right: none !important;
+    scroll-snap-align: center;
+    padding: 10px;
+  }
+
+  /* image center */
+  .collection-showcase__image {
+    max-width: 180px;
+  }
+
+  /* text adjust */
+  .collection-showcase__title {
+    font-size: 13px;
+  }
+
+  .collection-showcase__price {
+    font-size: 13px;
+  }
+
+  /* 🔥 FIX ADD TO CART MOBILE */
+  .add-to-cart-btn {
+    opacity: 1;
+    transform: translate(-50%, 0);
+    bottom: 20%;
+  }
+}
+
+{% endstyle %}
+
+<div class="collection-showcase color-{{ section.settings.color_scheme }}">
+  
+  {% if section.settings.heading != blank %}
+    <h2 class="collection-showcase__heading">
+      {{ section.settings.heading }}
+    </h2>
+  {% endif %}
+
+  <div class="collection-showcase__grid">
+
+    {% for block in section.blocks %}
+      {% assign product = block.settings.product %}
+      {% if product != blank %}
+
+      <div class="collection-showcase__item">
+
+        <img 
+          src="{{ product.featured_image | image_url: width: 600 }}" 
+          class="collection-showcase__image"
+        >
+
+        <div class="collection-showcase__title">
+          {{ product.title }}
+        </div>
+
+        <div class="collection-showcase__price">
+          {{ product.price | money }}
+        </div>
+
+        <!-- ADD TO CART -->
+        <form method="post" action="/cart/add">
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+          
+          <button type="submit" class="add-to-cart-btn">
+            +
+          </button>
+        </form>
+
+      </div>
+
+      {% endif %}
+    {% endfor %}
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Custom Product Showcase",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "DISCOVERY KITS"
+    },
+    {
+      "type": "range",
+      "id": "image_size",
+      "label": "Product Image Size",
+      "min": 150,
+      "max": 400,
+      "step": 10,
+      "default": 250
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color Scheme"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Select Product"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Product Showcase"
+    }
+  ]
+}
+{% endschema %}

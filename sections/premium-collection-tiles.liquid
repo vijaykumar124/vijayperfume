@@ -1,0 +1,831 @@
+{% comment %}
+  Featured Collections Section — Dawn Theme Compatible
+  ✅ Slick slider when blocks > 4
+  ✅ Center aligned when 1–2 blocks
+  ✅ Per-block: collection select, title, description, button label & alignment
+  ✅ Hover zoom effect on cards
+  ✅ Prev/Next arrows inside the section
+  ✅ Customizable gap, card height, heading, description
+  ✅ Mobile: 1 card visible, responsive
+  ✅ Premium luxury aesthetic matching screenshot
+{% endcomment %}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+
+<style>
+  /* ═══════════════════════════════════════
+     CSS VARIABLES
+  ═══════════════════════════════════════ */
+  #fc-section-{{ section.id }} {
+    --fc-bg:          {{ section.settings.section_bg }};
+    --fc-heading-clr: {{ section.settings.heading_color }};
+    --fc-desc-clr:    {{ section.settings.desc_color }};
+    --fc-gap:         {{ section.settings.card_gap }}px;
+    --fc-radius:      {{ section.settings.card_radius }}px;
+    --fc-card-h:      {{ section.settings.card_height }}px;
+    --fc-btn-bg:      {{ section.settings.btn_bg }};
+    --fc-btn-clr:     {{ section.settings.btn_color }};
+    --fc-btn-border:  {{ section.settings.btn_border_color }};
+    --fc-overlay:     {{ section.settings.overlay_color }};
+    --fc-overlay-opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
+    --fc-text-clr:    {{ section.settings.card_text_color }};
+    --fc-subtitle-clr:{{ section.settings.card_subtitle_color }};
+  }
+
+  /* ═══════════════════════════════════════
+     SECTION WRAPPER
+  ═══════════════════════════════════════ */
+  #fc-section-{{ section.id }} {
+    background: var(--fc-bg);
+    padding: {{ section.settings.section_padding_top }}px 0 {{ section.settings.section_padding_bottom }}px;
+    overflow: hidden;
+  }
+
+  #fc-section-{{ section.id }} .fc-inner {
+    max-width: {{ section.settings.section_max_width }}px;
+    margin: 0 auto;
+    padding: 0 {{ section.settings.section_side_padding }}px;
+  }
+
+  /* ═══════════════════════════════════════
+     HEADING AREA
+  ═══════════════════════════════════════ */
+  #fc-section-{{ section.id }} .fc-header {
+    text-align: center;
+    margin-bottom: {{ section.settings.header_gap }}px;
+  }
+
+  #fc-section-{{ section.id }} .fc-header .fc-superheading {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--fc-desc-clr);
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+
+  #fc-section-{{ section.id }} .fc-header h2 {
+    font-size: {{ section.settings.heading_size }}px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--fc-heading-clr);
+    margin: 0 0 14px;
+    line-height: 1.15;
+    font-family: inherit;
+  }
+
+  #fc-section-{{ section.id }} .fc-header .fc-desc {
+    font-size: 14px;
+    color: var(--fc-desc-clr);
+    max-width: 520px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  /* ═══════════════════════════════════════
+     SLIDER / GRID WRAPPER
+  ═══════════════════════════════════════ */
+  #fc-section-{{ section.id }} .fc-slider-wrap {
+    position: relative;
+  }
+
+  /* Static grid for ≤ 4 blocks (no slick) */
+  #fc-section-{{ section.id }} .fc-grid {
+    display: flex;
+    gap: var(--fc-gap);
+    justify-content: center;
+  }
+
+  /* When slick is active it overrides the flex */
+  #fc-section-{{ section.id }} .fc-grid.slick-initialized {
+    display: block;
+  }
+
+  /* ═══════════════════════════════════════
+     COLLECTION CARD
+  ═══════════════════════════════════════ */
+  #fc-section-{{ section.id }} .fc-card {
+    position: relative;
+    border-radius: var(--fc-radius);
+    overflow: hidden;
+    flex: 1 1 0;
+    min-width: 0;
+    cursor: pointer;
+    display: block;
+    text-decoration: none;
+    outline: none;
+  }
+
+  /* When slick is on, each slide needs padding for gap */
+  #fc-section-{{ section.id }} .slick-initialized .fc-slide-wrap {
+    padding: 0 calc(var(--fc-gap) / 2);
+  }
+
+  /* Image wrapper & zoom */
+  #fc-section-{{ section.id }} .fc-card-img {
+    width: 100%;
+    height: var(--fc-card-h);
+    object-fit: cover;
+    display: block;
+    transform: scale(1);
+    transition: transform 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    border-radius: var(--fc-radius);
+  }
+
+  #fc-section-{{ section.id }} .fc-card:hover .fc-card-img {
+    transform: scale({{ section.settings.zoom_scale | divided_by: 100.0 }});
+  }
+
+  /* Gradient overlay */
+  #fc-section-{{ section.id }} .fc-card-overlay {
+    position: absolute;
+    inset: 0;
+    border-radius: var(--fc-radius);
+    background: linear-gradient(
+      to top,
+      rgba(0,0,0,{{ section.settings.overlay_bottom_opacity | divided_by: 100.0 }}) 0%,
+      rgba(0,0,0,{{ section.settings.overlay_mid_opacity | divided_by: 100.0 }}) 45%,
+      rgba(0,0,0,{{ section.settings.overlay_top_opacity | divided_by: 100.0 }}) 100%
+    );
+    transition: opacity 0.4s ease;
+  }
+
+  #fc-section-{{ section.id }} .fc-card:hover .fc-card-overlay {
+    opacity: 0.92;
+  }
+
+  /* Card text block */
+  #fc-section-{{ section.id }} .fc-card-body {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 24px 20px 22px;
+  }
+
+  /* Center alignment option per card */
+  #fc-section-{{ section.id }} .fc-card-body.align-center { text-align: center; }
+  #fc-section-{{ section.id }} .fc-card-body.align-left   { text-align: left; }
+  #fc-section-{{ section.id }} .fc-card-body.align-right  { text-align: right; }
+
+  #fc-section-{{ section.id }} .fc-card-subtitle {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--fc-subtitle-clr);
+    margin: 0 0 5px;
+    display: block;
+    font-weight: 500;
+  }
+
+  #fc-section-{{ section.id }} .fc-card-title {
+    font-size: {{ section.settings.card_title_size }}px;
+    font-weight: 700;
+    color: var(--fc-text-clr);
+    margin: 0 0 14px;
+    line-height: 1.25;
+    letter-spacing: 0.01em;
+  }
+
+  #fc-section-{{ section.id }} .fc-card-btn {
+    display: inline-block;
+    background: var(--fc-btn-bg);
+    color: var(--fc-btn-clr);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 10px 18px;
+    border: 1.5px solid var(--fc-btn-border);
+    text-decoration: none;
+    border-radius: 2px;
+    transition: background 0.28s ease, color 0.28s ease, border-color 0.28s ease;
+    white-space: nowrap;
+  }
+
+  #fc-section-{{ section.id }} .fc-card-btn:hover {
+    background: var(--fc-btn-clr);
+    color: var(--fc-btn-bg);
+    border-color: var(--fc-btn-clr);
+  }
+
+  /* Placeholder card */
+  #fc-section-{{ section.id }} .fc-card-placeholder {
+    width: 100%;
+    height: var(--fc-card-h);
+    display: block;
+    object-fit: cover;
+    border-radius: var(--fc-radius);
+  }
+
+  /* ═══════════════════════════════════════
+     SLICK PREV / NEXT — inside section
+  ═══════════════════════════════════════ */
+  #fc-section-{{ section.id }} .fc-slider-wrap .slick-prev,
+  #fc-section-{{ section.id }} .fc-slider-wrap .slick-next {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: {{ section.settings.arrow_bg }};
+    border: 1.5px solid {{ section.settings.arrow_border }};
+    z-index: 20;
+    top: 50%;
+    transform: translateY(-50%);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+    transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1),
+                background 0.25s ease,
+                box-shadow 0.25s ease;
+  }
+
+  /* Arrows INSIDE the slider area */
+  #fc-section-{{ section.id }} .fc-slider-wrap .slick-prev { left: -50px; }
+  #fc-section-{{ section.id }} .fc-slider-wrap .slick-next { right: -50px; }
+
+  #fc-section-{{ section.id }} .fc-slider-wrap .slick-prev:hover,
+  #fc-section-{{ section.id }} .fc-slider-wrap .slick-next:hover {
+    transform: translateY(-50%) scale(1.18);
+    background: {{ section.settings.arrow_hover_bg }};
+    box-shadow: 0 8px 24px rgba(0,0,0,0.28);
+  }
+
+  #fc-section-{{ section.id }} .fc-slider-wrap .slick-prev:before,
+  #fc-section-{{ section.id }} .fc-slider-wrap .slick-next:before {
+    font-size: 18px;
+    color: {{ section.settings.arrow_color }};
+    opacity: 1;
+    line-height: 1;
+  }
+
+  /* Hide dots */
+  #fc-section-{{ section.id }} .fc-slider-wrap .slick-dots { display: none !important; }
+
+  /* ═══════════════════════════════════════
+     MOBILE
+  ═══════════════════════════════════════ */
+  @media (max-width: 767px) {
+    #fc-section-{{ section.id }} .fc-inner {
+      padding: 0 12px;
+    }
+
+    /* Always use slick on mobile */
+    #fc-section-{{ section.id }} .fc-grid {
+      display: block;
+    }
+
+    #fc-section-{{ section.id }} .fc-card-img,
+    #fc-section-{{ section.id }} .fc-card-placeholder {
+      height: {{ section.settings.card_height_mobile }}px;
+    }
+
+    #fc-section-{{ section.id }} .fc-card-body {
+      padding: 18px 16px 18px;
+    }
+
+    #fc-section-{{ section.id }} .fc-card-title {
+      font-size: {{ section.settings.card_title_size | minus: 4 }}px;
+    }
+
+    #fc-section-{{ section.id }} .fc-slider-wrap .slick-prev { left: 8px; }
+    #fc-section-{{ section.id }} .fc-slider-wrap .slick-next { right: 8px; }
+  }
+
+  @media (max-width: 480px) {
+    #fc-section-{{ section.id }} .fc-header h2 {
+      font-size: {{ section.settings.heading_size | minus: 8 }}px;
+    }
+  }
+</style>
+
+<section id="fc-section-{{ section.id }}">
+  <div class="fc-inner">
+
+    {%- comment -%} ── HEADER ── {%- endcomment -%}
+    {% if section.settings.superheading != blank or section.settings.heading != blank or section.settings.description != blank %}
+      <div class="fc-header">
+        {% if section.settings.superheading != blank %}
+          <span class="fc-superheading">{{ section.settings.superheading }}</span>
+        {% endif %}
+        {% if section.settings.heading != blank %}
+          <h2>{{ section.settings.heading }}</h2>
+        {% endif %}
+        {% if section.settings.description != blank %}
+          <p class="fc-desc">{{ section.settings.description }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {%- comment -%} ── SLIDER WRAP ── {%- endcomment -%}
+    <div class="fc-slider-wrap">
+      <div
+        class="fc-grid"
+        data-section-id="{{ section.id }}"
+        data-block-count="{{ section.blocks.size }}"
+        data-slider-threshold="{{ section.settings.slider_threshold }}"
+      >
+
+        {% for block in section.blocks %}
+          {%- assign coll = block.settings.collection -%}
+
+          {%- comment -%} Determine card image {%- endcomment -%}
+          {%- if block.settings.custom_image != blank -%}
+            {%- assign card_img = block.settings.custom_image -%}
+            {%- assign card_img_src = card_img | image_url: width: 800 -%}
+            {%- assign card_img_alt = block.settings.card_title | default: coll.title | default: 'Collection' -%}
+          {%- elsif coll != blank and coll.image != blank -%}
+            {%- assign card_img_src = coll.image | image_url: width: 800 -%}
+            {%- assign card_img_alt = coll.title -%}
+          {%- else -%}
+            {%- assign card_img_src = nil -%}
+            {%- assign card_img_alt = 'Collection' -%}
+          {%- endif -%}
+
+          {%- comment -%} Card URL {%- endcomment -%}
+          {%- if coll != blank -%}
+            {%- assign card_url = coll.url -%}
+          {%- else -%}
+            {%- assign card_url = '#' -%}
+          {%- endif -%}
+
+          {%- comment -%} Title & subtitle {%- endcomment -%}
+          {%- assign display_title    = block.settings.card_title    | default: coll.title    | default: 'Collection' -%}
+          {%- assign display_subtitle = block.settings.card_subtitle | default: '' -%}
+          {%- assign display_btn      = block.settings.btn_label     | default: section.settings.default_btn_label -%}
+          {%- assign display_align    = block.settings.text_align    | default: 'left' -%}
+
+          <div class="fc-slide-wrap" {{ block.shopify_attributes }}>
+            <a class="fc-card" href="{{ card_url }}" aria-label="{{ display_title | escape }}">
+
+              {%- comment -%} Card image {%- endcomment -%}
+              {% if card_img_src != nil %}
+                <img
+                  class="fc-card-img"
+                  src="{{ card_img_src }}"
+                  alt="{{ card_img_alt | escape }}"
+                  width="800"
+                  loading="lazy"
+                >
+              {% else %}
+                {{ 'collection-' | append: forloop.index | placeholder_svg_tag: 'fc-card-placeholder' }}
+              {% endif %}
+
+              {%- comment -%} Gradient overlay {%- endcomment -%}
+              <div class="fc-card-overlay"></div>
+
+              {%- comment -%} Text body {%- endcomment -%}
+              <div class="fc-card-body align-{{ display_align }}">
+                {% if display_subtitle != blank %}
+                  <span class="fc-card-subtitle">{{ display_subtitle }}</span>
+                {% endif %}
+
+                <p class="fc-card-title">{{ display_title }}</p>
+
+                {% if display_btn != blank %}
+                  <span class="button">{{ display_btn }}</span>
+                {% endif %}
+              </div>
+
+            </a>
+          </div>
+
+        {% endfor %}
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+
+<script>
+(function () {
+  'use strict';
+
+  function initFC(sectionId) {
+    var section = document.getElementById('fc-section-' + sectionId);
+    if (!section) return;
+
+    var grid = section.querySelector('.fc-grid');
+    if (!grid) return;
+
+    var blockCount      = parseInt(grid.dataset.blockCount, 10) || 0;
+    var threshold       = parseInt(grid.dataset.sliderThreshold, 10) || 4;
+    var isMobile        = window.innerWidth < 768;
+
+    if (typeof jQuery === 'undefined') { setTimeout(function(){ initFC(sectionId); }, 300); return; }
+
+    var $grid = jQuery(grid);
+
+    /* Destroy existing instance */
+    if ($grid.hasClass('slick-initialized')) {
+      $grid.slick('unslick');
+    }
+
+    /* Decide how many slides to show on desktop */
+    var desktopShow = Math.min(blockCount, threshold);
+
+    /* Use slick when: mobile (always) OR blocks > threshold */
+    var useSlick = isMobile || (blockCount > threshold);
+
+    if (useSlick) {
+      $grid.slick({
+        dots: false,
+        arrows: true,
+        infinite: blockCount > desktopShow,
+        speed: 500,
+        slidesToShow: isMobile ? 1 : desktopShow,
+        slidesToScroll: 1,
+        cssEase: 'cubic-bezier(0.4, 0, 0.2, 1)',
+        responsive: [
+          {
+            breakpoint: 1024,
+            settings: {
+              slidesToShow: Math.min(blockCount, 3),
+              slidesToScroll: 1
+            }
+          },
+          {
+            breakpoint: 767,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1,
+              arrows: true
+            }
+          }
+        ]
+      });
+    }
+  }
+
+  /* Run on load */
+  function boot(sectionId) {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', function(){ initFC(sectionId); });
+    } else {
+      initFC(sectionId);
+    }
+
+    /* Re-init on resize (mobile ↔ desktop switch) */
+    var resizeTimer;
+    window.addEventListener('resize', function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function(){ initFC(sectionId); }, 250);
+    });
+
+    /* Shopify editor reload */
+    document.addEventListener('shopify:section:load', function(e) {
+      if (e.detail && e.detail.sectionId === sectionId) initFC(sectionId);
+    });
+    document.addEventListener('shopify:block:select', function(e) {
+      if (e.detail && e.detail.sectionId === sectionId) initFC(sectionId);
+    });
+  }
+
+  boot('{{ section.id }}');
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Featured Collections",
+  "tag": "section",
+  "class": "fc-section-wrapper",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Heading"
+    },
+    {
+      "type": "text",
+      "id": "superheading",
+      "label": "Superheading (small text above)",
+      "default": "World of Captivating Fragrances"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Main Heading",
+      "default": "Discover Our Exquisite Collection"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#1a1a2e"
+    },
+    {
+      "type": "color",
+      "id": "desc_color",
+      "label": "Subheading / Description Color",
+      "default": "#888888"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading Font Size (px)",
+      "min": 16,
+      "max": 60,
+      "step": 1,
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "header_gap",
+      "label": "Gap: Header → Cards (px)",
+      "min": 10,
+      "max": 80,
+      "step": 2,
+      "default": 32
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "section_max_width",
+      "label": "Section Max Width (px)",
+      "min": 600,
+      "max": 1600,
+      "step": 20,
+      "default": 1280
+    },
+    {
+      "type": "range",
+      "id": "section_side_padding",
+      "label": "Section Side Padding (px)",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "label": "Section Padding Top (px)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "label": "Section Padding Bottom (px)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 56
+    },
+    {
+      "type": "color",
+      "id": "section_bg",
+      "label": "Section Background",
+      "default": "#f2f2f2"
+    },
+    {
+      "type": "header",
+      "content": "Card Settings"
+    },
+    {
+      "type": "range",
+      "id": "card_gap",
+      "label": "Gap Between Cards (px)",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "card_height",
+      "label": "Card Height Desktop (px)",
+      "min": 200,
+      "max": 900,
+      "step": 10,
+      "default": 500
+    },
+    {
+      "type": "range",
+      "id": "card_height_mobile",
+      "label": "Card Height Mobile (px)",
+      "min": 200,
+      "max": 700,
+      "step": 10,
+      "default": 420
+    },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "label": "Card Border Radius (px)",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "default": 6
+    },
+    {
+      "type": "range",
+      "id": "card_title_size",
+      "label": "Card Title Font Size (px)",
+      "min": 14,
+      "max": 48,
+      "step": 1,
+      "default": 26
+    },
+    {
+      "type": "color",
+      "id": "card_text_color",
+      "label": "Card Title Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_subtitle_color",
+      "label": "Card Subtitle Color",
+      "default": "#dddddd"
+    },
+    {
+      "type": "header",
+      "content": "Overlay"
+    },
+    {
+      "type": "range",
+      "id": "overlay_bottom_opacity",
+      "label": "Overlay Opacity — Bottom %",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "overlay_mid_opacity",
+      "label": "Overlay Opacity — Middle %",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "overlay_top_opacity",
+      "label": "Overlay Opacity — Top %",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Hover Zoom"
+    },
+    {
+      "type": "range",
+      "id": "zoom_scale",
+      "label": "Hover Zoom Scale (%)",
+      "min": 100,
+      "max": 130,
+      "step": 1,
+      "default": 108,
+      "info": "100 = no zoom, 108 = 8% zoom in"
+    },
+    {
+      "type": "header",
+      "content": "Button (default for all cards)"
+    },
+    {
+      "type": "text",
+      "id": "default_btn_label",
+      "label": "Default Button Label",
+      "default": "View Products"
+    },
+    {
+      "type": "color",
+      "id": "btn_bg",
+      "label": "Button Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "btn_color",
+      "label": "Button Text Color",
+      "default": "#1a1a2e"
+    },
+    {
+      "type": "color",
+      "id": "btn_border_color",
+      "label": "Button Border Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Arrow Buttons"
+    },
+    {
+      "type": "color",
+      "id": "arrow_bg",
+      "label": "Arrow Background",
+      "default": "rgba(255,255,255,0.85)"
+    },
+    {
+      "type": "color",
+      "id": "arrow_border",
+      "label": "Arrow Border Color",
+      "default": "#dddddd"
+    },
+    {
+      "type": "color",
+      "id": "arrow_color",
+      "label": "Arrow Icon Color",
+      "default": "#1a1a2e"
+    },
+    {
+      "type": "color",
+      "id": "arrow_hover_bg",
+      "label": "Arrow Hover Background",
+      "default": "#1a1a2e"
+    },
+    {
+      "type": "header",
+      "content": "Slider Threshold"
+    },
+    {
+      "type": "range",
+      "id": "slider_threshold",
+      "label": "Activate Slider When Cards >",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 4,
+      "info": "If you have more blocks than this number, slick slider activates automatically"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection_card",
+      "name": "Collection Card",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_image",
+          "label": "Custom Image (overrides collection image)"
+        },
+        {
+          "type": "text",
+          "id": "card_subtitle",
+          "label": "Subtitle (small text above title)",
+          "info": "e.g. 'Tribute', 'Historic', 'Rare'"
+        },
+        {
+          "type": "text",
+          "id": "card_title",
+          "label": "Card Title",
+          "info": "Leave blank to use collection title"
+        },
+        {
+          "type": "text",
+          "id": "btn_label",
+          "label": "Button Label",
+          "info": "Leave blank to use section default"
+        },
+        {
+          "type": "select",
+          "id": "text_align",
+          "label": "Text Alignment",
+          "options": [
+            { "value": "left",   "label": "Left" },
+            { "value": "center", "label": "Center" },
+            { "value": "right",  "label": "Right" }
+          ],
+          "default": "left"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Collections",
+      "blocks": [
+        { "type": "collection_card" },
+        { "type": "collection_card" },
+        { "type": "collection_card" },
+        { "type": "collection_card" },
+        { "type": "collection_card" }
+      ]
+    }
+  ],
+  "max_blocks": 12
+}
+{% endschema %}

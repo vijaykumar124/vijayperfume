@@ -1,0 +1,224 @@
+<style>
+.custom-header {
+  width: 100%;
+  z-index: 999;
+  transition: 0.3s;
+}
+
+.custom-header.transparent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: transparent;
+}
+
+.custom-header.sticky {
+  position: sticky;
+  top: 0;
+  background: #000;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 40px;
+  color: #fff;
+}
+
+/* LEFT */
+.header-left {
+  font-size: 13px;
+}
+
+/* CENTER */
+.header-center {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.header-menu a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  position: relative;
+}
+
+.header-menu a:after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 1px;
+  bottom: -3px;
+  left: 0;
+  background: #fff;
+  transition: 0.3s;
+}
+
+.header-menu a:hover:after {
+  width: 100%;
+}
+
+/* RIGHT */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.header-icon {
+  cursor: pointer;
+}
+
+/* MOBILE */
+.mobile-menu-btn {
+  display: none;
+  font-size: 22px;
+}
+
+.mobile-drawer {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 80%;
+  height: 100%;
+  background: #000;
+  padding: 20px;
+  transition: 0.3s;
+  z-index: 9999;
+}
+
+.mobile-drawer.active {
+  left: 0;
+}
+
+.mobile-drawer a {
+  display: block;
+  color: #fff;
+  margin-bottom: 15px;
+}
+
+@media(max-width: 768px){
+  .header-left,
+  .header-menu {
+    display: none;
+  }
+
+  .mobile-menu-btn {
+    display: block;
+  }
+
+  .header-inner {
+    padding: 10px 15px;
+  }
+}
+</style>
+
+<div class="custom-header {% if section.settings.transparent %}transparent{% endif %} {% if section.settings.sticky %}sticky{% endif %}">
+  
+  <div class="header-inner">
+
+    <!-- MOBILE BTN -->
+    <div class="mobile-menu-btn" onclick="toggleMenu()">☰</div>
+
+    <!-- LEFT (Country Selector) -->
+    <div class="header-left">
+      {% if section.settings.show_country %}
+        {%- form 'localization' -%}
+          <select name="country_code">
+            {{ form.country | country_option_tags }}
+          </select>
+        {%- endform -%}
+      {% endif %}
+    </div>
+
+    <!-- CENTER -->
+    <div class="header-center">
+      
+      <!-- LOGO -->
+      <a href="{{ routes.root_url }}">
+        {% if settings.logo %}
+          <img src="{{ settings.logo | image_url }}" width="120">
+        {% else %}
+          {{ shop.name }}
+        {% endif %}
+      </a>
+
+      <!-- MENU -->
+      <div class="header-menu">
+        {% if section.settings.menu != blank %}
+          {% for link in section.settings.menu.links %}
+            <a href="{{ link.url }}">{{ link.title }}</a>
+          {% endfor %}
+        {% endif %}
+      </div>
+
+    </div>
+
+    <!-- RIGHT -->
+    <div class="header-right">
+
+      <a href="{{ routes.search_url }}" class="header-icon">🔍</a>
+
+      <a href="{{ routes.account_url }}" class="header-icon">👤</a>
+
+      <a href="{{ routes.cart_url }}" class="header-icon">
+        🛒 {{ cart.item_count }}
+      </a>
+
+    </div>
+
+  </div>
+</div>
+
+<!-- MOBILE DRAWER -->
+<div class="mobile-drawer" id="mobileMenu">
+  {% if section.settings.menu != blank %}
+    {% for link in section.settings.menu.links %}
+      <a href="{{ link.url }}">{{ link.title }}</a>
+    {% endfor %}
+  {% endif %}
+</div>
+
+<script>
+function toggleMenu(){
+  document.getElementById("mobileMenu").classList.toggle("active");
+}
+</script>
+
+{% schema %}
+{
+  "name": "Custom Header PRO",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "transparent",
+      "label": "Transparent Header",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "sticky",
+      "label": "Sticky Header",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_country",
+      "label": "Enable Country Selector",
+      "default": true
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Select Menu"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Header PRO"
+    }
+  ]
+}
+{% endschema %}

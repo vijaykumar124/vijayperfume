@@ -1,0 +1,185 @@
+<style>
+.custom-banner {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  max-width: {{ section.settings.width }}px;
+  margin: auto;
+}
+
+/* DESKTOP HEIGHT */
+@media(min-width: 769px){
+  .custom-banner {
+    height: {{ section.settings.height }}px;
+  }
+}
+
+/* IMAGE */
+.custom-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* MOBILE FIX */
+@media(max-width: 768px){
+  .custom-banner {
+    height: auto;
+  }
+
+  .custom-banner img {
+    height: auto;
+  }
+}
+
+/* CONTENT */
+.banner-content {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+}
+
+/* POSITION */
+.pos-left { left: 5%; }
+.pos-center { left: 50%; transform: translateX(-50%); }
+.pos-right { right: 5%; }
+
+.pos-top { top: 10%; }
+.pos-middle { top: 50%; transform: translate(-50%, -50%); }
+.pos-bottom { bottom: 10%; }
+
+/* BUTTON */
+.banner-btn {
+  display: inline-block;
+  padding: 10px 25px;
+  border: 1px solid #fff;
+  color: #fff;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.banner-btn:hover {
+  background: #fff;
+  color: #000;
+}
+
+/* MOBILE CONTENT CENTER */
+@media(max-width: 768px){
+  .banner-content {
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    text-align: center;
+    width: 100%;
+  }
+}
+</style>
+
+<div class="custom-banner">
+
+  <!-- IMAGE FIX LOGIC -->
+  {% if section.settings.image_mobile != blank %}
+    <picture>
+      <source media="(max-width: 768px)" srcset="{{ section.settings.image_mobile | image_url }}">
+      <img src="{{ section.settings.image | image_url }}" alt="">
+    </picture>
+  {% elsif section.settings.image != blank %}
+    <img src="{{ section.settings.image | image_url }}" alt="">
+  {% endif %}
+
+  <!-- CONTENT -->
+  <div class="banner-content 
+      pos-{{ section.settings.horizontal }} 
+      pos-{{ section.settings.vertical }}">
+
+    {% if section.settings.button_text != blank %}
+      <a href="{{ section.settings.button_link }}" class="banner-btn">
+        {{ section.settings.button_text }}
+      </a>
+    {% endif %}
+
+  </div>
+
+</div>
+
+{% schema %}
+{
+  "name": "Custom Image Banner",
+  "settings": [
+
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Desktop Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Mobile Image (Optional)"
+    },
+
+    {
+      "type": "range",
+      "id": "height",
+      "label": "Banner Height (Desktop)",
+      "min": 200,
+      "max": 900,
+      "step": 10,
+      "default": 500
+    },
+
+    {
+      "type": "range",
+      "id": "width",
+      "label": "Max Width",
+      "min": 500,
+      "max": 1800,
+      "step": 50,
+      "default": 1400
+    },
+
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "SHOP NOW"
+    },
+
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+
+    {
+      "type": "select",
+      "id": "horizontal",
+      "label": "Horizontal Position",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+
+    {
+      "type": "select",
+      "id": "vertical",
+      "label": "Vertical Position",
+      "options": [
+        { "value": "top", "label": "Top" },
+        { "value": "middle", "label": "Middle" },
+        { "value": "bottom", "label": "Bottom" }
+      ],
+      "default": "middle"
+    }
+
+  ],
+  "presets": [
+    {
+      "name": "Custom Image Banner"
+    }
+  ]
+}
+{% endschema %}

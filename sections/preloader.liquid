@@ -1,0 +1,217 @@
+{% if settings.enable_preloader %}
+<style>
+#site-preloader {
+  position: fixed; inset:0;
+  background:#fff;
+  display:flex; justify-content:center; align-items:center;
+  z-index:999999;
+  transition:opacity .4s ease, visibility .4s ease;
+}
+#site-preloader.hidden { opacity:0; visibility:hidden; }
+
+/* -------- 1. Pulse -------- */
+.pulse { animation:pulseAnim 1.2s infinite ease-in-out; width: auto; height: auto;}
+@keyframes pulseAnim { 0%,100%{transform:scale(1);opacity:.8;} 50%{transform:scale(1.15);opacity:1;} }
+
+/* -------- 2. Gradient Wave -------- */
+.gradient-wave { width:180px;height:180px;background:radial-gradient(circle,#eee,#ccc);border-radius:50%;position:relative;animation:waveSpin 1.5s infinite linear; }
+.gradient-wave img { width:70%; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); }
+@keyframes waveSpin {100%{transform:rotate(360deg);}}
+
+/* -------- 3. SVG Line Draw -------- */
+.line-draw-logo { display:block; }
+
+/* -------- 4. 3D Rotate -------- */
+.logo-3d { animation:rot3d 1.5s linear infinite; }
+@keyframes rot3d { 0%{transform:rotateY(0deg);}100%{transform:rotateY(360deg);} }
+
+/* -------- 5. Fade-In -------- */
+.fade-logo { animation:fadeLoop 1.4s infinite; }
+@keyframes fadeLoop { 0%{opacity:0;}50%{opacity:1;}100%{opacity:0;} }
+
+/* -------- 6. Minimal Circle -------- */
+.minimal-loader { width:40px;height:40px;border:4px solid #ddd;border-top-color:#000;border-radius:50%;animation:minSpin 1s linear infinite; }
+@keyframes minSpin { 100%{transform:rotate(360deg);} }
+
+/* -------- 7. Glassmorphism -------- */
+.glass-loader { width:200px;height:200px;backdrop-filter:blur(12px);background:rgba(255,255,255,.25);border:1px solid rgba(255,255,255,.4);border-radius:24px;display:flex;justify-content:center;align-items:center;animation:floatAnim 2s infinite ease-in-out; }
+.glass-logo { width:60%; }
+@keyframes floatAnim { 0%,100%{transform:translateY(0);}50%{transform:translateY(-12px);} }
+
+/* -------- 8. Neon Glow -------- */
+.neon-logo { width:150px; filter:drop-shadow(0 0 12px #0ff); animation:neonPulse 1.5s infinite; }
+@keyframes neonPulse { 0%,100%{filter:drop-shadow(0 0 6px #0ff);}50%{filter:drop-shadow(0 0 22px #0ff);} }
+
+/* -------- 9. Gooey Bubbles -------- */
+.gooey-container { width:120px;height:40px; display:flex;justify-content:space-between; filter:url(#gooeyFilter); }
+.gooey-container span { width:20px;height:20px;background:#000;border-radius:50%; animation:gooMove .8s infinite alternate; }
+@keyframes gooMove { to{transform:translateY(-10px);} }
+
+/* -------- 10. Gooey Logo Reveal -------- */
+.gooey-reveal img { width:160px; animation:gooReveal 2s infinite; }
+@keyframes gooReveal { 0%{clip-path:circle(0% at 50% 50%);}60%{clip-path:circle(80% at 50% 50%);}100%{clip-path:circle(0% at 50% 50%);} }
+
+/* -------- 11. Ripple Loader -------- */
+.ripple-loader { position: relative; width: 220px; height: 220px; display:flex; align-items:center; justify-content:center; }
+.ripple-loader div { position:absolute; border:3px solid #000; border-radius:50%; animation:rippleAnim 1.6s infinite; opacity: .9; }
+.ripple-loader div:nth-child(1){width:80px;height:80px;}
+.ripple-loader div:nth-child(2){width:110px;height:110px;animation-delay:.4s;}
+.ripple-loader div:nth-child(3){width:140px;height:140px;animation-delay:.8s;}
+@keyframes rippleAnim { 0%{opacity:1;transform:scale(.3);} 100%{opacity:0;transform:scale(1);} }
+
+/* -------- 12. Morph Shape -------- */
+.morph-shape { width:200px;height:200px;background:#eee;border-radius:30% 70% 60% 40%/40% 60% 70% 30%; animation:morphing 3s infinite; }
+@keyframes morphing { 0%,100%{border-radius:30% 70% 60% 40%/40% 60% 70% 30%;} 50%{border-radius:60% 40% 30% 70%/70% 30% 40% 60%;} }
+
+/* -------- 13. Orbit Dots -------- */
+.orbit-wrapper { width:160px;height:160px;position:relative; display:flex; align-items:center; justify-content:center; }
+.orbit-dot { width:14px;height:14px;background:#000;border-radius:50%; position:absolute; animation:orbitDot 1.4s infinite linear; }
+.orbit-logo { width:80px; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); }
+@keyframes orbitDot { 100%{transform:rotate(360deg) translateX(60px) rotate(-360deg);} }
+
+/* -------- 14. Bubbles -------- */
+.bubble-loader { position:relative; width:160px; height:160px; display:flex; align-items:center; justify-content:center; }
+.bubble-loader span { width:20px;height:20px;background:#000;border-radius:50%;position:absolute; animation:bubbleUp 1.2s infinite ease-in-out; }
+@keyframes bubbleUp { from{transform:translateY(20px);opacity:.4;} to{transform:translateY(-30px);opacity:1;} }
+
+/* -------- 15. Slide Reveal -------- */
+.slide-logo { width:150px; transform:translateX(-100%); animation:slideAnim 1.6s infinite; }
+@keyframes slideAnim { 0%{transform:translateX(-100%);}50%{transform:translateX(0);}100%{transform:translateX(100%);} }
+
+/* -------- 16. Pixel Loader -------- */
+#pixelCanvas { width:150px; image-rendering:pixelated; animation:pixelBlur 1.3s infinite; }
+@keyframes pixelBlur { 0%{filter:blur(5px);}50%{filter:blur(0);}100%{filter:blur(5px);} }
+
+/* small responsive tweaks */
+#site-preloader img { max-width: 100%; height: auto; display:block; }
+</style>
+
+<!-- Gooey Filter -->
+<svg style="position:absolute;width:0;height:0">
+  <filter id="gooeyFilter">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur"/>
+    <feColorMatrix in="blur" mode="matrix"
+      values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -10"/>
+  </filter>
+</svg>
+
+<div id="site-preloader" aria-hidden="true" role="status" aria-label="Loading">
+  {% case settings.preloader_style %}
+    {% when 'pulse' %}
+      <img class="pulse" src="{{ settings.preloader_logo | img_url: '600x' }}" style="width:{{ settings.preloader_logo_size }}px;" alt="Loading">
+
+    {% when 'gradient' %}
+      <div class="gradient-wave"><img src="{{ settings.preloader_logo | img_url: '600x' }}" style="width:{{ settings.preloader_logo_size }}px;" alt="Loading"></div>
+
+    {% when 'line' %}
+      <svg class="line-draw-logo" width="{{ settings.preloader_logo_size }}" height="{{ settings.preloader_logo_size }}" viewBox="0 0 200 200" aria-hidden="true">
+        <image href="{{ settings.preloader_logo | img_url: '600x' }}" width="200" height="200" />
+      </svg>
+
+    {% when 'rotate3d' %}
+      <img class="logo-3d" src="{{ settings.preloader_logo | img_url: '600x' }}" style="width:{{ settings.preloader_logo_size }}px;" alt="Loading">
+
+    {% when 'fade' %}
+      <img class="fade-logo" src="{{ settings.preloader_logo | img_url: '600x' }}" style="width:{{ settings.preloader_logo_size }}px;" alt="Loading">
+
+    {% when 'minimal' %}
+      <div class="minimal-loader" role="status" aria-label="Loading"></div>
+
+    {% when 'glass' %}
+      <div class="glass-loader"><img class="glass-logo" src="{{ settings.preloader_logo | img_url: '600x' }}" alt="Loading"></div>
+
+    {% when 'neon' %}
+      <img class="neon-logo" src="{{ settings.preloader_logo | img_url: '600x' }}" style="width:{{ settings.preloader_logo_size }}px;" alt="Loading">
+
+    {% when 'gooey' %}
+      <div class="gooey-container" aria-hidden="true"><span></span><span></span><span></span></div>
+
+    {% when 'gooey-reveal' %}
+      <div class="gooey-reveal"><img src="{{ settings.preloader_logo | img_url: '600x' }}" style="width:{{ settings.preloader_logo_size }}px;" alt="Loading"></div>
+
+    {% when 'ripple' %}
+      <div class="ripple-loader" aria-hidden="true">
+        <div></div><div></div><div></div>
+        <img src="{{ settings.preloader_logo | img_url: '600x' }}" class="ripple-logo" style="width:{{ settings.preloader_logo_size }}px; position:relative; z-index:2;" alt="Loading">
+      </div>
+
+    {% when 'morph' %}
+      <div class="morph-shape" aria-hidden="true"></div>
+
+    {% when 'orbit' %}
+      <div class="orbit-wrapper" aria-hidden="true">
+        <div class="orbit-dot"></div>
+        <img class="orbit-logo" src="{{ settings.preloader_logo | img_url: '600x' }}" style="width:{{ settings.preloader_logo_size }}px;" alt="Loading">
+      </div>
+
+    {% when 'bubbles' %}
+      <div class="bubble-loader" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+      <img class="bubble-logo" src="{{ settings.preloader_logo | img_url: '600x' }}" style="width:{{ settings.preloader_logo_size }}px; opacity:0.0; position:absolute;" alt="">
+
+    {% when 'slide' %}
+      <img class="slide-logo" src="{{ settings.preloader_logo | img_url: '600x' }}" style="width:{{ settings.preloader_logo_size }}px;" alt="Loading">
+
+    {% when 'pixel' %}
+      <canvas id="pixelCanvas" width="200" height="200" aria-hidden="true"></canvas>
+      <img id="pixelSource" src="{{ settings.preloader_logo | img_url: '600x' }}" style="display:none" alt="">
+
+    {% when 'lottie' %}
+      {% if settings.lottie_url != blank %}
+        <div id="lottie-animation" style="width:{{ settings.preloader_logo_size }}px; height:auto;" aria-hidden="true"></div>
+      {% else %}
+        <!-- fallback to pulse if no Lottie URL -->
+        <img class="pulse" src="{{ settings.preloader_logo | img_url: '600x' }}" style="width:{{ settings.preloader_logo_size }}px;" alt="Loading">
+      {% endif %}
+  {% endcase %}
+</div>
+
+<!-- Pixel canvas JS: converts image into pixel effect (optional, small script below) -->
+<script>
+(function(){
+  // Lottie loader script injection (only when selected)
+  {% if settings.preloader_style == 'lottie' and settings.lottie_url != blank %}
+    var s = document.createElement('script');
+    s.src = "https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.6/lottie.min.js";
+    s.onload = function(){
+      try {
+        lottie.loadAnimation({
+          container: document.getElementById('lottie-animation'),
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: "{{ settings.lottie_url }}"
+        });
+      } catch(e) { console.warn('Lottie load error', e); }
+    };
+    document.head.appendChild(s);
+  {% endif %}
+
+  // Pixel canvas rendering (for 'pixel' style)
+  {% if settings.preloader_style == 'pixel' %}
+    window.addEventListener('load', function(){
+      try {
+        var img = document.getElementById('pixelSource');
+        var canvas = document.getElementById('pixelCanvas');
+        var ctx = canvas.getContext('2d');
+        // draw lower-res version for pixelated effect
+        img.onload = function(){
+          var w = canvas.width, h = canvas.height;
+          ctx.imageSmoothingEnabled = false;
+          ctx.clearRect(0,0,w,h);
+          ctx.drawImage(img,0,0,w,h);
+        };
+        if (img.complete) img.onload();
+      } catch(e) { console.warn('Pixel effect error', e); }
+    });
+  {% endif %}
+
+  // Hide preloader once page fully loads
+  window.addEventListener('load', function(){
+    var pre = document.getElementById('site-preloader');
+    if(!pre) return;
+    setTimeout(function(){ pre.classList.add('hidden'); pre.setAttribute('aria-hidden','true'); }, 200);
+  });
+})();
+</script>
+
+{% endif %}

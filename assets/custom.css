@@ -1,0 +1,178 @@
+/* TRANSPARENT HEADER */
+.header--transparent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: transparent !important;
+  z-index: 999;
+}
+
+SCROLL PE BG AA JAYE
+.scrolled-past-header .header--transparent {
+  background: #000 !important; /* ya white jo chahiye */
+}
+
+.header-wrapper--border-bottom {
+    border-bottom: -0.9rem solid rgba(var(--color-foreground),.08) !important;
+}
+
+
+/* WRAPPER */
+.slick-collection {
+  position: relative;
+}
+
+/* SPACING */
+.slick-collection .slick-slide {
+  padding: 0 10px;
+}
+
+/* REMOVE DEFAULT ICON */
+.slick-collection .slick-prev:before,
+.slick-collection .slick-next:before {
+  content: '';
+}
+
+/* ARROWS */
+.slick-collection .slick-prev,
+.slick-collection .slick-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+
+  width: 42px;
+  height: 42px;
+
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(0,0,0,0.6);
+  border: none;
+  border-radius: 50%;
+
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* LEFT / RIGHT */
+.slick-collection .slick-prev {
+  left: 12px;
+}
+
+.slick-collection .slick-next {
+  right: 12px;
+}
+
+/* CUSTOM ARROW ICON */
+.slick-collection .slick-prev::after,
+.slick-collection .slick-next::after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+}
+
+/* LEFT */
+.slick-collection .slick-prev::after {
+  transform: rotate(135deg);
+}
+
+/* RIGHT */
+.slick-collection .slick-next::after {
+  transform: rotate(-45deg);
+}
+
+/* HOVER */
+.slick-collection .slick-prev:hover,
+.slick-collection .slick-next:hover {
+  background: #000;
+  transform: translateY(-50%) scale(1.1);
+}
+
+/* MOBILE HIDE */
+@media (max-width: 768px) {
+  .slick-collection .slick-prev,
+  .slick-collection .slick-next {
+    display: none !important;
+  }
+}
+
+
+
+.product-form__input--pill input[type=radio]:checked+label {
+    background-color: rgb(13 13 13 / 0%) !important;
+    color: rgb(0 0 0) !important;
+}
+
+
+
+
+.button{
+  background: linear-gradient(to right, #000 50%, #fff 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  transition: all 0.5s ease-out;
+}
+.button:hover {
+  background-position: left bottom;
+  color: #fff;
+}
+
+
+.button--secondary:after {
+    --border-opacity: var(--buttons-border-opacity);
+    border: 1px solid black !important;
+}
+
+
+.shopify-payment-button__button--unbranded {
+    background-color: rgba(var(--color-button),var(--alpha-button-background));
+    color: rgb(255 255 255) !important;
+    font-size: 1.4rem;
+    line-height: calc(1 + .2 / var(--font-body-scale));
+    letter-spacing: .07rem;
+}
+
+
+
+.shopify-payment-button__button.shopify-payment-button__button--unbranded {
+  position: relative !important;
+  overflow: hidden !important;
+  background: #000 !important;
+  color: #fff !important;
+  border-radius: 8px !important;
+  transition: all 0.3s ease !important;
+}
+
+/* Shine layer */
+.shopify-payment-button__button.shopify-payment-button__button--unbranded::before {
+  content: "" !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: -75% !important;
+  width: 50% !important;
+  height: 100% !important;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.5),
+    transparent
+  ) !important;
+  transform: skewX(-20deg) !important;
+}
+
+/* Hover pe slide */
+.shopify-payment-button__button.shopify-payment-button__button--unbranded:hover::before {
+  left: 125% !important;
+  transition: all 0.8s ease !important;
+}
+
+/* subtle hover lift */
+.shopify-payment-button__button.shopify-payment-button__button--unbranded:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25) !important;
+}
