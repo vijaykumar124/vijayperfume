@@ -1,0 +1,100 @@
+{% if section.settings.media != blank %}
+<section class="custom-gif-banner">
+  <div class="page-width">
+    <div class="custom-gif-banner__inner">
+      <img
+        src="{{ section.settings.media | image_url }}"
+        alt="{{ section.settings.media.alt | escape }}"
+        class="custom-gif-banner__image"
+        loading="lazy"
+        width="{{ section.settings.media.width }}"
+        height="{{ section.settings.media.height }}"
+      >
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<style>
+  .custom-gif-banner {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  .custom-gif-banner__inner {
+    width: 100%;
+  }
+
+  .custom-gif-banner__image {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  @media screen and (max-width: 749px) {
+    .custom-gif-banner {
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Custom GIF Banner",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "media",
+      "label": "Image / GIF"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Desktop Top Padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Desktop Bottom Padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Mobile Top Padding",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Mobile Bottom Padding",
+      "default": 20
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom GIF Banner"
+    }
+  ]
+}
+{% endschema %}
