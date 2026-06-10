@@ -94,16 +94,16 @@
       "name": "Custom Banner Pro Max",
       "settings": {
         "image": "shopify://shop_images/Lynked_Second-WEB.webp",
-        "banner_height": 95,
+        "banner_height": 100,
         "mobile_height": 50,
         "overlay_opacity": 0.4,
         "overlay_color": "#ffffff",
         "overlay_direction": "to top",
         "content_position": "center-center",
-        "subheading_size": 14,
+        "subheading_size": 16,
         "subheading_color": "#ffffff",
-        "heading_size": 42,
-        "heading_size_mobile": 26,
+        "heading_size": 52,
+        "heading_size_mobile": 34,
         "heading_color": "#ffffff"
       }
     },
