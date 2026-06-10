@@ -1,0 +1,725 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "order": [
+    "image_banner",
+    "custom_image_banner_bLCct7",
+    "ctm_banner_2_0_LPTRDT",
+    "ctm_banner_2_0_Epm3HJ",
+    "featured_collection_rwPKMc",
+    "premium_collection_grid_dyNdYd",
+    "featured_collection_9WPhj9",
+    "featured_collection_wNaqmm",
+    "ctm_banner_2_0_hhDVxy",
+    "custom_image_banner_4wJkYA",
+    "featured_collection_MPTad3",
+    "featured_collection_BJVTkp",
+    "custom_image_banner_cYmnhJ",
+    "ctm_banner_2_0_MBbhND",
+    "shop_the_look_jGefwP",
+    "custom_showcase_jjEtB9",
+    "premium_collection_tiles_k4XeT4",
+    "multicolumn_9GRYpb"
+  ],
+  "sections": {
+    "ctm_banner_2_0_Epm3HJ": {
+      "block_order": [
+        "button_akFjwP"
+      ],
+      "blocks": {
+        "button_akFjwP": {
+          "settings": {
+            "btn_bg": "#ffffff",
+            "btn_border": "#ffffff",
+            "btn_text": "#000000",
+            "label": "SHOP NOW",
+            "link": ""
+          },
+          "type": "button"
+        }
+      },
+      "disabled": true,
+      "name": "Custom Banner Pro Max",
+      "settings": {
+        "banner_height": 70,
+        "content_position": "right",
+        "heading_color": "#ffffff",
+        "heading_size": 42,
+        "heading_size_mobile": 26,
+        "image": "shopify://shop_images/9_Series_-_2000_X_685_px_1.webp",
+        "mobile_height": 50,
+        "overlay_color": "#000000",
+        "overlay_direction": "to bottom",
+        "overlay_opacity": 0.5,
+        "subheading_color": "#ffffff",
+        "subheading_size": 14
+      },
+      "type": "ctm-banner-2-0"
+    },
+    "ctm_banner_2_0_LPTRDT": {
+      "block_order": [
+        "button_efCWAw"
+      ],
+      "blocks": {
+        "button_efCWAw": {
+          "settings": {
+            "btn_bg": "#ffffff",
+            "btn_border": "#ffffff",
+            "btn_text": "#000000",
+            "label": "SHOP NOW",
+            "link": ""
+          },
+          "type": "button"
+        }
+      },
+      "name": "Custom Banner Pro Max",
+      "settings": {
+        "banner_height": 100,
+        "content_position": "center-center",
+        "heading_color": "#ffffff",
+        "heading_size": 52,
+        "heading_size_mobile": 34,
+        "image": "shopify://shop_images/Lynked_Second-WEB.webp",
+        "mobile_height": 50,
+        "overlay_color": "#ffffff",
+        "overlay_direction": "to top",
+        "overlay_opacity": 0.4,
+        "subheading_color": "#ffffff",
+        "subheading_size": 16
+      },
+      "type": "ctm-banner-2-0"
+    },
+    "ctm_banner_2_0_MBbhND": {
+      "block_order": [
+        "heading_MrdjFC",
+        "button_GeeQLj"
+      ],
+      "blocks": {
+        "button_GeeQLj": {
+          "settings": {
+            "btn_bg": "#ffffff",
+            "btn_border": "#ffffff",
+            "btn_text": "#000000",
+            "label": "SHOP NOW",
+            "link": ""
+          },
+          "type": "button"
+        },
+        "heading_MrdjFC": {
+          "settings": {
+            "text": "GIFT SETS"
+          },
+          "type": "heading"
+        }
+      },
+      "name": "Custom Banner Pro Max",
+      "settings": {
+        "banner_height": 65,
+        "content_position": "center-center",
+        "heading_color": "#ffffff",
+        "heading_size": 42,
+        "heading_size_mobile": 26,
+        "image": "shopify://shop_images/Dive_2000_X_889_Px_2_copy.jpg",
+        "mobile_height": 50,
+        "overlay_color": "#000000",
+        "overlay_direction": "to bottom",
+        "overlay_opacity": 0.4,
+        "subheading_color": "#ffffff",
+        "subheading_size": 14
+      },
+      "type": "ctm-banner-2-0"
+    },
+    "ctm_banner_2_0_hhDVxy": {
+      "block_order": [
+        "heading_iVF3R7",
+        "button_tFn6ef"
+      ],
+      "blocks": {
+        "button_tFn6ef": {
+          "settings": {
+            "btn_bg": "#ffffff",
+            "btn_border": "#ffffff",
+            "btn_text": "#000000",
+            "label": "SHOP NOW",
+            "link": ""
+          },
+          "type": "button"
+        },
+        "heading_iVF3R7": {
+          "settings": {
+            "text": "GIFT SETS"
+          },
+          "type": "heading"
+        }
+      },
+      "name": "Custom Banner Pro Max",
+      "settings": {
+        "banner_height": 70,
+        "content_position": "bottom-left",
+        "heading_color": "#ffffff",
+        "heading_size": 42,
+        "heading_size_mobile": 26,
+        "image": "shopify://shop_images/9_Series_-_2000_X_685_px_1_copy.jpg",
+        "mobile_height": 50,
+        "overlay_color": "#121212",
+        "overlay_direction": "to top",
+        "overlay_opacity": 1,
+        "subheading_color": "#ffffff",
+        "subheading_size": 14
+      },
+      "type": "ctm-banner-2-0"
+    },
+    "custom_image_banner_4wJkYA": {
+      "disabled": true,
+      "name": "Custom Image Banner",
+      "settings": {
+        "button_link": "",
+        "button_text": "SHOP NOW",
+        "height": 260,
+        "horizontal": "left",
+        "image": "shopify://shop_images/9_Series_-_2000_X_685_px_1.webp",
+        "vertical": "middle",
+        "width": 1400
+      },
+      "type": "custom-image-banner"
+    },
+    "custom_image_banner_bLCct7": {
+      "disabled": true,
+      "name": "Custom Image Banner",
+      "settings": {
+        "button_link": "",
+        "button_text": "SHOP NOW",
+        "height": 330,
+        "horizontal": "left",
+        "image": "shopify://shop_images/Lynked_Second-WEB_copy_815bf223-10e9-4313-96ef-74ed31a97580.jpg",
+        "vertical": "middle",
+        "width": 1600
+      },
+      "type": "custom-image-banner"
+    },
+    "custom_image_banner_cYmnhJ": {
+      "disabled": true,
+      "name": "Custom Image Banner",
+      "settings": {
+        "button_link": "",
+        "button_text": "SHOP NOW",
+        "height": 500,
+        "horizontal": "center",
+        "image": "shopify://shop_images/Dive_2000_X_889_Px_2.webp",
+        "vertical": "bottom",
+        "width": 1400
+      },
+      "type": "custom-image-banner"
+    },
+    "custom_showcase_jjEtB9": {
+      "block_order": [
+        "product_Chd6zE",
+        "product_8RFjYn"
+      ],
+      "blocks": {
+        "product_8RFjYn": {
+          "settings": {
+            "product": "bouquet-series-discovery-kit"
+          },
+          "type": "product"
+        },
+        "product_Chd6zE": {
+          "settings": {
+            "product": "supremacy-femme-series-discovery-kit"
+          },
+          "type": "product"
+        }
+      },
+      "name": "Custom Product Showcase",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "heading": "DISCOVERY KITS",
+        "image_size": 250
+      },
+      "type": "custom-showcase"
+    },
+    "featured_collection_9WPhj9": {
+      "disabled": true,
+      "name": "t:sections.featured-collection.presets.name",
+      "settings": {
+        "collection": "perfume",
+        "color_scheme": "scheme-2",
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "description": "<p>MUST HAVE</p>",
+        "description_style": "subtitle",
+        "enable_desktop_slider": false,
+        "full_width": false,
+        "heading_size": "h1",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "padding_bottom": 36,
+        "padding_top": 36,
+        "products_to_show": 4,
+        "quick_add": "none",
+        "show_description": false,
+        "show_rating": false,
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_view_all": true,
+        "swipe_on_mobile": false,
+        "title": "FOR MEN",
+        "view_all_style": "solid"
+      },
+      "type": "featured-collection"
+    },
+    "featured_collection_BJVTkp": {
+      "name": "t:sections.featured-collection.presets.name",
+      "settings": {
+        "collection": "perfume",
+        "color_scheme": "scheme-2",
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "description": "<h1>BEST SELLERS</h1>",
+        "description_style": "subtitle",
+        "enable_desktop_slider": false,
+        "full_width": true,
+        "heading_size": "h2",
+        "image_ratio": "portrait",
+        "image_shape": "default",
+        "padding_bottom": 36,
+        "padding_top": 36,
+        "products_to_show": 5,
+        "quick_add": "none",
+        "show_description": false,
+        "show_rating": false,
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_view_all": true,
+        "swipe_on_mobile": false,
+        "title": "MUST HAVE",
+        "view_all_style": "solid"
+      },
+      "type": "featured-collection"
+    },
+    "featured_collection_MPTad3": {
+      "disabled": true,
+      "name": "t:sections.featured-collection.presets.name",
+      "settings": {
+        "collection": "perfume",
+        "color_scheme": "scheme-2",
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "description": "<p>MUST HAVE</p>",
+        "description_style": "body",
+        "enable_desktop_slider": false,
+        "full_width": false,
+        "heading_size": "h1",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "padding_bottom": 36,
+        "padding_top": 36,
+        "products_to_show": 4,
+        "quick_add": "none",
+        "show_description": false,
+        "show_rating": false,
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_view_all": true,
+        "swipe_on_mobile": false,
+        "title": "FOR WOMEN",
+        "view_all_style": "solid"
+      },
+      "type": "featured-collection"
+    },
+    "featured_collection_rwPKMc": {
+      "name": "t:sections.featured-collection.presets.name",
+      "settings": {
+        "collection": "perfume",
+        "color_scheme": "scheme-2",
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "description": "<h1>BEST SELLERS</h1>",
+        "description_style": "subtitle",
+        "enable_desktop_slider": false,
+        "full_width": true,
+        "heading_size": "h2",
+        "image_ratio": "portrait",
+        "image_shape": "default",
+        "padding_bottom": 36,
+        "padding_top": 36,
+        "products_to_show": 5,
+        "quick_add": "none",
+        "show_description": false,
+        "show_rating": false,
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_view_all": true,
+        "swipe_on_mobile": false,
+        "title": "MUST HAVE",
+        "view_all_style": "solid"
+      },
+      "type": "featured-collection"
+    },
+    "featured_collection_wNaqmm": {
+      "name": "t:sections.featured-collection.presets.name",
+      "settings": {
+        "collection": "perfume",
+        "color_scheme": "scheme-2",
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "description": "<h1>BEST SELLERS</h1>",
+        "description_style": "subtitle",
+        "enable_desktop_slider": false,
+        "full_width": true,
+        "heading_size": "h2",
+        "image_ratio": "portrait",
+        "image_shape": "default",
+        "padding_bottom": 36,
+        "padding_top": 36,
+        "products_to_show": 5,
+        "quick_add": "none",
+        "show_description": false,
+        "show_rating": false,
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_view_all": true,
+        "swipe_on_mobile": false,
+        "title": "MUST HAVE",
+        "view_all_style": "solid"
+      },
+      "type": "featured-collection"
+    },
+    "image_banner": {
+      "block_order": [
+        "heading",
+        "text_TTRFTn",
+        "button"
+      ],
+      "blocks": {
+        "button": {
+          "settings": {
+            "button_label_1": "SHOP NOW",
+            "button_label_2": "EXPLORE",
+            "button_link_1": "shopify://collections/all",
+            "button_link_2": "",
+            "button_style_secondary_1": false,
+            "button_style_secondary_2": false
+          },
+          "type": "buttons"
+        },
+        "heading": {
+          "settings": {
+            "heading": "NEW LAUNCH",
+            "heading_size": "h0"
+          },
+          "type": "heading"
+        },
+        "text_TTRFTn": {
+          "settings": {
+            "text": "9 PM NIGHT OUT",
+            "text_style": "subtitle"
+          },
+          "type": "text"
+        }
+      },
+      "custom_css": [
+        "h2 {color: white;}"
+      ],
+      "settings": {
+        "color_scheme": "scheme-2",
+        "desktop_content_alignment": "left",
+        "desktop_content_position": "bottom-left",
+        "image": "shopify://shop_images/Hero-web_1.webp",
+        "image_behavior": "none",
+        "image_height": "large",
+        "image_overlay_opacity": 40,
+        "mobile_content_alignment": "center",
+        "show_text_below": false,
+        "show_text_box": false,
+        "stack_images_on_mobile": true
+      },
+      "type": "image-banner"
+    },
+    "multicolumn_9GRYpb": {
+      "block_order": [
+        "column_KBYrdQ",
+        "column_iQABwx",
+        "column_TfrJzD",
+        "column_9NUatA"
+      ],
+      "blocks": {
+        "column_9NUatA": {
+          "settings": {
+            "image": "shopify://shop_images/Group_1171275775.avif",
+            "link": "",
+            "link_label": "",
+            "text": "",
+            "title": "<strong>SECURE PAYMENTS</strong>"
+          },
+          "type": "column"
+        },
+        "column_KBYrdQ": {
+          "settings": {
+            "image": "shopify://shop_images/Group_1171275777.avif",
+            "link": "",
+            "link_label": "",
+            "text": "",
+            "title": "<strong>CUSTOMER SERVICE</strong>"
+          },
+          "type": "column"
+        },
+        "column_TfrJzD": {
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design_-_2024-12-27T161920.092-removebg-preview.png",
+            "link": "",
+            "link_label": "",
+            "text": "",
+            "title": "<strong>FREE SHIPPING ON PREPAID ORDERS</strong>"
+          },
+          "type": "column"
+        },
+        "column_iQABwx": {
+          "settings": {
+            "image": "shopify://shop_images/Group_1171275774.avif",
+            "link": "",
+            "link_label": "",
+            "text": "",
+            "title": "<strong>FREE DELIVERY OVER ₹2000</strong>"
+          },
+          "type": "column"
+        }
+      },
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "background_style": "none",
+        "button_label": "",
+        "button_link": "",
+        "color_scheme": "scheme-2",
+        "column_alignment": "center",
+        "columns_desktop": 4,
+        "columns_mobile": "1",
+        "heading_size": "h2",
+        "image_ratio": "adapt",
+        "image_width": "third",
+        "padding_bottom": 36,
+        "padding_top": 36,
+        "swipe_on_mobile": false,
+        "title": "Our services"
+      },
+      "type": "multicolumn"
+    },
+    "premium_collection_grid_dyNdYd": {
+      "block_order": [
+        "collection_card_ARaaf4",
+        "collection_card_gf68nq",
+        "collection_card_UPpYKB",
+        "collection_card_gYzGf6"
+      ],
+      "blocks": {
+        "collection_card_ARaaf4": {
+          "settings": {
+            "button_text": "SHOP NOW",
+            "collection": "bouquet-series",
+            "pos_x": 50,
+            "pos_y": 80,
+            "zoom": 1.1
+          },
+          "type": "collection_card"
+        },
+        "collection_card_UPpYKB": {
+          "settings": {
+            "button_text": "SHOP NOW",
+            "collection": "rare-series",
+            "pos_x": 50,
+            "pos_y": 80,
+            "zoom": 1.1
+          },
+          "type": "collection_card"
+        },
+        "collection_card_gYzGf6": {
+          "settings": {
+            "button_text": "SHOP NOW",
+            "collection": "souvenir-series",
+            "pos_x": 50,
+            "pos_y": 80,
+            "zoom": 1.1
+          },
+          "type": "collection_card"
+        },
+        "collection_card_gf68nq": {
+          "settings": {
+            "button_text": "SHOP NOW",
+            "collection": "supremacy-series",
+            "pos_x": 50,
+            "pos_y": 80,
+            "zoom": 1.1
+          },
+          "type": "collection_card"
+        }
+      },
+      "name": "Premium Collection Grid",
+      "settings": {},
+      "type": "premium-collection-grid"
+    },
+    "premium_collection_tiles_k4XeT4": {
+      "block_order": [
+        "collection_card_H4LDxV",
+        "collection_card_PefNG9",
+        "collection_card_zWbp8i",
+        "collection_card_PHYpJ9",
+        "collection_card_tXL78z"
+      ],
+      "blocks": {
+        "collection_card_H4LDxV": {
+          "settings": {
+            "btn_label": "",
+            "card_subtitle": "",
+            "card_title": "",
+            "collection": "souvenir-series",
+            "text_align": "left"
+          },
+          "type": "collection_card"
+        },
+        "collection_card_PHYpJ9": {
+          "settings": {
+            "btn_label": "",
+            "card_subtitle": "",
+            "card_title": "",
+            "collection": "rare-series",
+            "text_align": "left"
+          },
+          "type": "collection_card"
+        },
+        "collection_card_PefNG9": {
+          "settings": {
+            "btn_label": "",
+            "card_subtitle": "",
+            "card_title": "",
+            "collection": "supremacy-series",
+            "text_align": "left"
+          },
+          "type": "collection_card"
+        },
+        "collection_card_tXL78z": {
+          "settings": {
+            "btn_label": "",
+            "card_subtitle": "",
+            "card_title": "",
+            "collection": "supremacy-series",
+            "text_align": "left"
+          },
+          "type": "collection_card"
+        },
+        "collection_card_zWbp8i": {
+          "settings": {
+            "btn_label": "",
+            "card_subtitle": "",
+            "card_title": "",
+            "collection": "bouquet-series",
+            "text_align": "left"
+          },
+          "type": "collection_card"
+        }
+      },
+      "name": "Premium Collection Tiles",
+      "settings": {
+        "arrow_bg": "#ffffffd9",
+        "arrow_border": "#dddddd",
+        "arrow_color": "#1a1a2e",
+        "arrow_hover_bg": "#1a1a2e",
+        "btn_bg": "#ffffff",
+        "btn_border_color": "#ffffff",
+        "btn_color": "#1a1a2e",
+        "card_gap": 8,
+        "card_height": 500,
+        "card_height_mobile": 420,
+        "card_radius": 6,
+        "card_subtitle_color": "#f3f3f3",
+        "card_text_color": "#ffffff",
+        "card_title_size": 26,
+        "default_btn_label": "View Products",
+        "desc_color": "#ffffff",
+        "description": "",
+        "header_gap": 32,
+        "heading": "DISCOVER OUR EXQUISITE COLLECTION",
+        "heading_color": "#1a1a2e",
+        "heading_size": 30,
+        "overlay_bottom_opacity": 80,
+        "overlay_mid_opacity": 20,
+        "overlay_top_opacity": 0,
+        "section_bg": "#efefef",
+        "section_max_width": 1280,
+        "section_padding_bottom": 56,
+        "section_padding_top": 56,
+        "section_side_padding": 20,
+        "slider_threshold": 4,
+        "superheading": "World of Captivating Fragrances",
+        "zoom_scale": 108
+      },
+      "type": "premium-collection-tiles"
+    },
+    "shop_the_look_jGefwP": {
+      "block_order": [
+        "look_LVUD7g",
+        "look_HxAT3t"
+      ],
+      "blocks": {
+        "look_HxAT3t": {
+          "settings": {
+            "focal_point_1_x": 35,
+            "focal_point_1_y": 55,
+            "focal_point_2_x": 65,
+            "focal_point_2_y": 65,
+            "main_image": "shopify://shop_images/Untitled_design_22q.webp",
+            "product_1": "historic-olmeda",
+            "product_2": "historic-doria",
+            "variant_id_1": "",
+            "variant_id_2": ""
+          },
+          "type": "look"
+        },
+        "look_LVUD7g": {
+          "settings": {
+            "focal_point_1_x": 23,
+            "focal_point_1_y": 46,
+            "focal_point_2_x": 65,
+            "focal_point_2_y": 65,
+            "main_image": "shopify://shop_images/Screen_Shot_2020-08-13_at_12_24_07_AM_600x_progressive_png.webp",
+            "product_1": "supremacy-purple",
+            "product_2": "supremacy-purple-1",
+            "variant_id_1": "52497165648161",
+            "variant_id_2": "52497165615393"
+          },
+          "type": "look"
+        }
+      },
+      "name": "Shop The Look",
+      "settings": {
+        "animation_speed": 400,
+        "btn_label": "View Product",
+        "button_bg": "#1a1a2e",
+        "button_color": "#ffffff",
+        "dot_active_color": "#1a1a2e",
+        "gap_size": 50,
+        "heading": "OUR LOOKS",
+        "heading_color": "#2e221a",
+        "heading_size": 29,
+        "image_border_radius": 8,
+        "image_width": 420,
+        "product_name_color": "#1a1a2e",
+        "product_price_color": "#555555",
+        "section_bg": "#ffffff",
+        "section_height": 460,
+        "section_max_width": 960,
+        "section_padding_bottom": 60,
+        "section_padding_top": 60,
+        "subheading": "SHOP",
+        "subheading_color": "#f3f3f3"
+      },
+      "type": "shop-the-look"
+    }
+  }
+}
